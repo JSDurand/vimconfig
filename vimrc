@@ -22,6 +22,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-misc'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()            " required
 " }}}
 
@@ -324,4 +325,4 @@ noremap <silent> <Leader>t :CtrlP()<CR>
 noremap <leader>b<space> :CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = '\v[\/]dist$'
 
-execute pathogen#infect()
+"execute pathogen#infect()
