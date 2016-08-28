@@ -1,11 +1,43 @@
+" Further vimtex configurations {{{
+call vimtex#imaps#add_map({
+  \ 'lhs' : 'fk',
+  \ 'rhs' : '\mathfrak{',
+  \ 'wrapper' : 'vimtex#imaps#wrap_trivial'
+  \})
+
+call vimtex#imaps#add_map({
+  \ 'lhs' : 'bb',
+  \ 'rhs' : '\mathbb{',
+  \ 'wrapper' : 'vimtex#imaps#wrap_trivial'
+  \})
+
+call vimtex#imaps#add_map({
+  \ 'lhs' : 'cl',
+  \ 'rhs' : '\mathcal{',
+  \ 'wrapper' : 'vimtex#imaps#wrap_trivial'
+  \})
+
+call vimtex#imaps#add_map({
+  \ 'lhs' : 'hm',
+  \ 'rhs' : '\Hom{',
+  \ 'wrapper' : 'vimtex#imaps#wrap_trivial'
+  \})
+
+call vimtex#imaps#add_map({
+  \ 'lhs' : 'sr',
+  \ 'rhs' : '\mathsr{',
+  \ 'wrapper' : 'vimtex#imaps#wrap_trivial'
+  \})
+" }}}
+
 " Normal mappings {{{
 nnoremap <buffer> <leader>ll :VimtexCompile<cr>
 nnoremap <buffer> <leader>c  :s/^/%<space>/g<cr>
 nnoremap <buffer> <leader>lv :VimtexView<cr>
 nnoremap <buffer> <leader>en diWi\begin{<esc>pa}<cr>\end{<esc>pa}<esc>O
-nnoremap <buffer> <leader>de  :call <SID>DeleteEnv()<cr>
-nnoremap <buffer> <leader>dae :call <SID>DeleteAllEnv()<cr>
-nnoremap <buffer> <leader>ce  :call <SID>ChangeEnv()<cr>
+"nnoremap <buffer> <leader>de  :call <SID>DeleteEnv()<cr>
+"nnoremap <buffer> <leader>dae :call <SID>DeleteAllEnv()<cr>
+"nnoremap <buffer> <leader>ce  :call <SID>ChangeEnv()<cr>
 "nnoremap <buffer> <c-e>       :call <SID>DetermineSnippet()<cr>
 "nnoremap <buffer> <c-j>       :call <SID>MyJumpInFile("<+++>")<cr>
 " }}}

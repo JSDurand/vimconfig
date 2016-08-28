@@ -138,7 +138,7 @@ nnoremap ù `
 nnoremap à 0
 vnoremap à 0
 
-nnoremap <leader>d dd
+"nnoremap <leader>d dd
 
 vnoremap < <gv
 vnoremap > >gv
