@@ -12,9 +12,12 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 "Bundle 'altercation/vim-colors-solarized'
 "Plugin 'https://github.com/powerline/powerline'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'lervag/vimtex'
 Plugin 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -23,6 +26,9 @@ Plugin 'xolox/vim-misc'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-surround'
+Plugin 'godlygeek/tabular'
+Plugin 'eagletmt/ghcmod-vim'
 call vundle#end()            " required
 " }}}
 
@@ -34,6 +40,7 @@ syntax on
 filetype plugin indent on
 
 set number
+set relativenumber
 "set nowrap
 set formatoptions=l
 set showmode
@@ -57,6 +64,14 @@ set clipboard=unnamed
 set autoread
 set hlsearch
 set backupdir=/Users/durand/Vim-SWP-files/
+" }}}
+
+" Vim-snipmate settings {{{
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+
+imap <c-k> <Plug>snipMateBack
+smap <c-k> <Plug>snipMateBack
 " }}}
 
 " Ultisnips settings {{{
@@ -117,6 +132,7 @@ let mapleader = ","
 let maplocalleader = "©"
 
 nnoremap ze zR
+nnoremap zd zM
 nnoremap ù `
 
 nnoremap à 0
@@ -139,6 +155,12 @@ onoremap in{ :<c-u>normal! f{vi{<cr>
 onoremap in[ :<c-u>normal! f[vi[<cr>
 onoremap in( :<c-u>normal! f(vi(<cr>
 
+nnoremap <leader>co :w<space>!pbcopy<cr>
+vnoremap <leader>co :w<space>!pbcopy<cr>
+
+nnoremap <leader>pa :r<space>!pbpaste<cr>
+vnoremap <leader>pa :r<space>!pbpaste<cr>
+
 set nobackup
 set nowritebackup
 set noswapfile
@@ -154,29 +176,27 @@ vnoremap <leader>ev :split  $MYVIMRC<cr>
 vnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap ) }
 nnoremap ( {
-"nnoremap } )
-"nnoremap { (
 vnoremap ) }
 vnoremap ( {
 " }}}
 
 " tex and haskell settings {{{
-augroup tex_and_haskell
-  autocmd!
-  autocmd FileType haskell  nnoremap <leader>c  :s /^/--<space>/g<cr>
-  autocmd FileType haskell  vnoremap <leader>c  :s /^/--<space>/g<cr>
-  autocmd FileType lhaskell nnoremap <leader>b  :s /^/><space>/g<cr>
-  autocmd FileType lhaskell vnoremap <leader>b  :s /^/><space>/g<cr>
-  autocmd FileType lhaskell nnoremap <leader>bu :s /^><space>//<cr>
-  autocmd FileType lhaskell vnoremap <leader>bu :s /^><space>//g<cr>
-  autocmd FileType haskell  nnoremap <leader>cu :s /^--<space>//<cr>
-  autocmd Filetype haskell  vnoremap <leader>cu :s /^--<space>//<cr>
-  autocmd Filetype haskell  vnoremap <leader>a  :Tabularize<space>/::<cr>
-  autocmd Filetype lhaskell vnoremap <leader>a  :Tabularize<space>/::<cr>
-  autocmd FileType tex      nnoremap <leader>c  :s/^/%<space>/g<cr>
-  autocmd FileType tex      nnoremap <leader>ll :VimtexCompile<cr>
+"augroup tex_and_haskell
+"  autocmd!
+  "autocmd FileType haskell  nnoremap <leader>c  :s /^/--<space>/g<cr>
+  "autocmd FileType haskell  vnoremap <leader>c  :s /^/--<space>/g<cr>
+  "autocmd FileType lhaskell nnoremap <leader>b  :s /^/><space>/g<cr>
+  "autocmd FileType lhaskell vnoremap <leader>b  :s /^/><space>/g<cr>
+  "autocmd FileType lhaskell nnoremap <leader>bu :s /^><space>//<cr>
+  "autocmd FileType lhaskell vnoremap <leader>bu :s /^><space>//g<cr>
+  "autocmd FileType haskell  nnoremap <leader>cu :s /^--<space>//<cr>
+  "autocmd Filetype haskell  vnoremap <leader>cu :s /^--<space>//<cr>
+  "autocmd Filetype haskell  vnoremap <leader>a  :Tabularize<space>/::<cr>
+  "autocmd Filetype lhaskell vnoremap <leader>a  :Tabularize<space>/::<cr>
+  "autocmd FileType tex      nnoremap <leader>c  :s/^/%<space>/g<cr>
+  "autocmd FileType tex      nnoremap <leader>ll :VimtexCompile<cr>
   "autocmd FileType tex      imap             )  <Plug>(vimtex-delim-close)
-augroup END
+"augroup END
 
 let g:haskellmode_completion_ghc = 1
 augroup haskell_plugin
@@ -198,6 +218,14 @@ let g:tex_nospell=1
 let g:tex_no_error=1
 "let g:Tex_CompileRule_pdf = 'pdflatex'   
 let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_callback = 'ViewerCallback'
+
+function! ViewerCallback(status) dict
+  if a:status
+    VimtexView
+  endif
+endfunction
+
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
 "let g:vimtex_view_general_options_latexmk = '-r 1'
 let g:vimtex_latexmk_callback_hooks = ['UpdateSkim'] 
@@ -252,12 +280,12 @@ map <Leader>s :SyntasticToggleMode<CR>
 " }}}
 
 " ghc mod settings {{{
-noremap <silent> tw :GhcModTypeInsert<CR>
-noremap <silent> tc :GhcModCheck<CR>
-noremap <silent> tl :GhcModLint<CR>
-noremap <silent> ts :GhcModSplitFunCase<CR>
-noremap <silent> tq :GhcModType<CR>
-noremap <silent> te :GhcModTypeClear<CR>
+nnoremap <silent> tw :GhcModTypeInsert<CR>
+nnoremap <silent> tc :GhcModCheck<CR>
+nnoremap <silent> tl :GhcModLint<CR>
+nnoremap <silent> ts :GhcModSplitFunCase<CR>
+nnoremap <silent> tq :GhcModType<CR>
+nnoremap <silent> te :GhcModTypeClear<CR>
 " }}}
 
 " old statusline settings {{{

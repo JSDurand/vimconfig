@@ -1,0 +1,81 @@
+\documentclass[]{article}
+\usepackage{amssymb, latexsym, amsmath, amsthm, tikz, mathrsfs, tikz-cd}    
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+\usepackage{lmodern}
+\usepackage[fixlanguage]{babelbib}
+\usepackage[french]{babel}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usetikzlibrary{matrix}
+\usepackage{tcolorbox}
+
+\selectbiblanguage{french}
+\newunicodechar{≠}{\not=}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{1.00in}
+\addtolength{\evensidemargin}{-0.75in}
+\addtolength{\oddsidemargin}{-0.75in}
+\addtolength{\topmargin}{-.50in}
+
+\begin{document}
+
+\title{<+++>{Le Title}}
+
+\author{<+++>{Awllower}}
+
+\date{\today}
+
+%\date{\vspace{-5ex}}
+\maketitle
+
+\newtheoremstyle{solution}{}{}{}{}{\itshape}{.}{\newline}{\thmname{#1}\thmnote{ (#3)}}
+\newtheoremstyle{exercises}{}{}{}{}{\bfseries}{.}{\newline}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset numberings for each chapter
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section] % definition numbers are dependent on sections numbers
+\newtheorem{exemp}{Example}[section] % same for example numberings
+\newtheorem{remk}{Remark}[section] % same for remark numberings
+\newtheorem{prop}{Proposition}[section] % same for proposition numberings
+\newtheorem{lemm}{Lemma}[section]
+\newtheorem{coro}{Corollary}[prop]
+\newtheorem{conj}{Conjecture}[section]
+\theoremstyle{exercises}
+\newtheorem{exer}{Exercises}[section]
+\theoremstyle{solution}
+
+\makeatletter
+\newtheorem*{rep@theorem}{\rep@title}
+\newcommand{\newreptheorem}[2]{%
+\newenvironment{rep#1}[1]{%
+ \def\rep@title{#2 \ref*{##1}}%
+ \begin{rep@theorem}}%
+ {\end{rep@theorem}}}
+\makeatother
+
+\newreptheorem{soln}{Solution to exercise}
+
+\newcommand{\Hom}{\ensuremath{\operatorname{Hom}}}
+\newcommand{\msc}{\ensuremath{\mathscr}}
+\newcommand{\mcl}{\ensuremath{\mathcal}}
+\newcommand{\ob}{\ensuremath{\operatorname{Obj}}}
+\newcommand{\til}{\tilde}
+\newcommand{\ke}{\ensuremath{\operatorname{Ker}}}
+\newcommand{\cok}{\ensuremath{\operatorname{Coker}}}
+\newcommand{\Cop}{\ensuremath{\mathcal{C}^{op}}}
+\newcommand{\Spec}{\ensuremath{\operatorname{Spec}}}
+\newcommand{\aphi}{\ensuremath{\prescript{a}{}{\phi}}}
+\newcommand{\Set}{\ensuremath{\operatorname{Set}}}
+\renewcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+\tableofcontents
+\newpage
+\section{<+++>{Section name}}
+<+++>{Commencez ici maintenant.}
+\end{document}
